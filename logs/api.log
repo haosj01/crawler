@@ -1,0 +1,24 @@
+2021-04-23 16:47:50|INFO|开始发送邮件
+2021-04-23 16:47:50|INFO|mysql查询成功：SELECT DISTINCT u.phone,sum(IF(r.coin_type = 'USDT', total_share_value, '0' )),sum(IF( r.coin_type = 'SXC', total_share_value, '0' )) FROM `cybermoney_bz`.bz_financial_order r LEFT JOIN `cybermoney_bz`.`user` u ON r.user_id = u.id WHERE r.create_time >= DATE_SUB( CURDATE(), INTERVAL 1 DAY ) AND r.create_time < CURDATE() GROUP BY u.phone
+2021-04-23 16:47:50|INFO|mysql查询的数据量为：0
+2021-04-23 16:47:50|INFO|mysql查询成功：
+        SELECT 
+            u.phone,
+            SUM(IF(coin_type = 'usdt',balance_change,'0')),
+            SUM(IF(coin_type = 'sxc',balance_change,'0'))
+        FROM
+        `cybermoney_bz`.wallet_flow w
+         LEFT JOIN `cybermoney_bz`.`user` u ON w.user_id = u.id
+        WHERE
+           (w.operate_type = 'CZ' 
+            OR (
+            w.operate_type = 'XZ' 
+            AND w.coin_type = 'SXC'))
+            AND w.create_time >= DATE_SUB( CURDATE(), INTERVAL 1 DAY ) AND w.create_time < CURDATE() GROUP BY u.phone
+    
+2021-04-23 16:47:50|INFO|mysql查询的数据量为：0
+2021-04-23 16:47:50|INFO|mysql查询成功：SELECT recommender_user_phone FROM `cybermoney_bz`.user_recommender WHERE create_time >= DATE_SUB( CURDATE(), INTERVAL 1 DAY ) AND create_time < CURDATE()
+2021-04-23 16:47:50|INFO|mysql查询的数据量为：0
+2021-04-23 16:47:50|INFO|mysql查询成功：select COUNT(DISTINCT user_id),sum(IF(coin_type = 'USDT', total_share_value, '0' )),sum(IF( coin_type = 'SXC', total_share_value, '0' )) from `cybermoney_bz`.bz_financial_order where create_time <  CURDATE() 
+2021-04-23 16:47:50|INFO|mysql查询的数据量为：1
+2021-04-23 16:47:51|INFO|邮件发送成功
